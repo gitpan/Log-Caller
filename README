@@ -1,0 +1,26 @@
+NAME
+    Log::Caller
+
+SYNOPSIS
+     log_debug "scanning new data...";
+     [debug] scanning new data...  at t/00compile.t line 6
+
+     log_warn "client %d not found!",$id;
+
+DESCRIPTION
+     There are scores of loggers out there, of varying usefulness, yet I still find myself and others constantly putting 
+     warn "blah" everywhere in the code. Why? 
+     a) because we're lazy, and it's the lowest effort form of logging output for debugging.
+     b) the call stack is appended nicely
+     c) because loggers can get huge and crufty
+     I wanted something that would work like warn but be filterable with proper log levels, so I ended up here.
+
+AUTHOR
+     sam@socialflow.com, sponsored by SocialFlow, Inc.
+
+COPYRIGHT & LICENSE
+    Copyright 2012, Sam Kaufman skaufman@cpan.org
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
