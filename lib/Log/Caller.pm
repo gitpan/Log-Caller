@@ -4,7 +4,7 @@ use warnings;
 use parent 'Exporter';
 our @EXPORT_OK   = qw[ log_debug log_info log_error log_warn log_fatal ];
 our %EXPORT_TAGS = ( all => \@EXPORT_OK );
-our $VERSION     = '0.01';
+our $VERSION     = '0.02';
 
 sub _msg {
     my ( $lvl, $pkg, $fn, $ln, @yarrgs ) = @_;
@@ -37,6 +37,25 @@ Log::Caller
 
 =head1 DESCRIPTION
  
+
+=over 4
+
+=item log_$level EXPR LIST
+
+Take EXPR as a sprintf pattern and evaluate it with LIST if defined, print it to STDERR.
+
+=back
+
+=head1 EXPORT
+
+The following functions are available for export:
+
+log_debug, log_info, log_error, log_warn, log_fatal,
+
+The :all tag is also available for importing all.
+
+=head1 JUSTIFICATION
+
 There are scores of loggers out there, of varying usefulness, yet I still find myself and others constantly putting 
 warn "blah" everywhere in the code. 
 
@@ -49,8 +68,6 @@ b) the call stack is appended nicely
 c) because most loggers are full of bloat
 
 I wanted something that would work like warn but be filterable with proper log levels.
-
-
 
 =head1 AUTHOR
 

@@ -3,17 +3,41 @@ NAME
 
 SYNOPSIS
      log_debug "scanning new data...";
+
      [debug] scanning new data...  at t/00compile.t line 6
 
      log_warn "client %d not found!",$id;
 
+     [warn] client 123 not found! at t/00compile.t line 8
+
 DESCRIPTION
-     There are scores of loggers out there, of varying usefulness, yet I still find myself and others constantly putting 
-     warn "blah" everywhere in the code. Why? 
-     a) because we're lazy, and it's the lowest effort form of logging output for debugging.
-     b) the call stack is appended nicely
-     c) because loggers can get huge and crufty
-     I wanted something that would work like warn but be filterable with proper log levels, so I ended up here.
+    log_$level EXPR LIST
+        Take EXPR as a sprintf pattern and evaluate it with LIST if defined,
+        print it to STDERR.
+
+EXPORT
+    The following functions are available for export:
+
+    log_debug, log_info, log_error, log_warn, log_fatal,
+
+    The :all tag is also available for importing all.
+
+JUSTIFICATION
+    There are scores of loggers out there, of varying usefulness, yet I
+    still find myself and others constantly putting warn "blah" everywhere
+    in the code.
+
+    Why?
+
+    a) because we're lazy, and it's the lowest effort form of logging output
+    for debugging.
+
+    b) the call stack is appended nicely
+
+    c) because most loggers are full of bloat
+
+    I wanted something that would work like warn but be filterable with
+    proper log levels.
 
 AUTHOR
      sam@socialflow.com, sponsored by SocialFlow, Inc.
