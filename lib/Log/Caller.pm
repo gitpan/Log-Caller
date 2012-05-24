@@ -1,23 +1,35 @@
 package Log::Caller;
 use strict;
 use warnings;
-use parent 'Exporter';
-our @EXPORT_OK   = qw[ log_debug log_info log_error log_warn log_fatal ];
-our %EXPORT_TAGS = ( all => \@EXPORT_OK );
-our $VERSION     = '0.02';
+sub _exports {qw[ log_debug log_info log_error log_warn log_fatal ]}
+use Sub::Exporter -setup => {
+    exports => { map { $_ => \&_build_log_msg } _exports() },
+    groups  => { all => [ _exports() ] },
+};
+
+our $VERSION = '0.03';
 
 sub _msg {
-    my ( $lvl, $pkg, $fn, $ln, @yarrgs ) = @_;
+    my ( $params, $pkg, $fn, $ln, @yarrgs ) = @_;
+    my($lvl,$prefix,$fh) = @$params{qw/lvl prefix fh/};
+    $fh ||= *STDERR;
+    $prefix = $prefix ? $prefix." " : "";
     my $format = shift @yarrgs || '';
     my $msg = sprintf( $format, (@yarrgs) );
-    print STDERR join( ' ', "[$lvl]", $msg, 'at', $fn, 'line', $ln ) . "\n";
+    print $fh $prefix."[$lvl] $msg at $fn line $ln.\n";
+    
 }
 
-sub log_warn  { _msg 'warn',  caller, @_ }
-sub log_debug { _msg 'debug', caller, @_ }
-sub log_info  { _msg 'info',  caller, @_ }
-sub log_error { _msg 'error', caller, @_ }
-sub log_fatal { _msg 'fatal', caller, @_ }
+
+sub _build_log_msg {
+    my ( $class, $log_func, $params ) = @_;
+    $log_func =~ s/^log_//g;
+    $params ||= {};
+    return sub {
+        _msg( { %$params, lvl => $log_func, }, caller, @_ );
+    };
+}
+
 1;
 __END__
 
@@ -42,11 +54,28 @@ Log::Caller
 
 =item log_$level EXPR LIST
 
-Take EXPR as a sprintf pattern and evaluate it with LIST if defined, print it to STDERR.
+Take EXPR as a sprintf pattern and evaluate it with LIST if defined, print it to STDERR or the provided filehandle.
 
 =back
 
 =head1 EXPORT
+
+=head2 Configuration
+
+ use Log::Caller ":all";
+
+ use Log::Caller qw[ log_debug log_warn ];
+
+ use Log::Caller ":all" => { prefix => ' <prefixin>' };
+ 
+ my $fh;
+ BEGIN { open( $fh, ">", "outs.txt" ) or die "$@ $!" };
+ use Log::Caller (
+    "log_debug" => { prefix => 'prefix1>', fh => $fh },
+    "log_warn" => { prefix => 'prefixDos::' },
+    );
+        
+
 
 The following functions are available for export:
 
@@ -68,6 +97,10 @@ b) the call stack is appended nicely
 c) because most loggers are full of bloat
 
 I wanted something that would work like warn but be filterable with proper log levels.
+
+=head1 SEE ALSO
+
+L<Log::Fu> - A configurable logger with caller context among other features.
 
 =head1 AUTHOR
 

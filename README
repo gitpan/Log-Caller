@@ -13,9 +13,23 @@ SYNOPSIS
 DESCRIPTION
     log_$level EXPR LIST
         Take EXPR as a sprintf pattern and evaluate it with LIST if defined,
-        print it to STDERR.
+        print it to STDERR or the provided filehandle.
 
 EXPORT
+  Configuration
+     use Log::Caller ":all";
+
+     use Log::Caller qw[ log_debug log_warn ];
+
+     use Log::Caller ":all" => { prefix => ' <prefixin>' };
+ 
+     my $fh;
+     BEGIN { open( $fh, ">", "outs.txt" ) or die "$@ $!" };
+     use Log::Caller (
+        "log_debug" => { prefix => 'prefix1>', fh => $fh },
+        "log_warn" => { prefix => 'prefixDos::' },
+        );
+
     The following functions are available for export:
 
     log_debug, log_info, log_error, log_warn, log_fatal,
@@ -38,6 +52,10 @@ JUSTIFICATION
 
     I wanted something that would work like warn but be filterable with
     proper log levels.
+
+SEE ALSO
+    Log::Fu - A configurable logger with caller context among other
+    features.
 
 AUTHOR
      sam@socialflow.com, sponsored by SocialFlow, Inc.

@@ -9,20 +9,24 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "provides: log_(debug,warn,info,error,fatal) with warn() like caller context",
-  "AUTHOR" => "Samuel Kaufman <sam\@socialflow.com>",
-  "BUILD_REQUIRES" => {
+  ABSTRACT => "provides: log_(debug,warn,info,error,fatal) with warn() like caller context",
+  AUTHOR => "Samuel Kaufman <sam\@socialflow.com>",
+  BUILD_REQUIRES => {
     "Test::More" => 0
   },
-  "CONFIGURE_REQUIRES" => {
+  CONFIGURE_REQUIRES => {
     "ExtUtils::MakeMaker" => "6.30"
   },
-  "DISTNAME" => "Log-Caller",
-  "EXE_FILES" => [],
-  "LICENSE" => "perl",
-  "NAME" => "Log::Caller",
-  "VERSION" => "0.02",
-  "test" => {
+  PREREQ_PM => {
+    parent => 0,
+    'Sub::Exporter' => '0.982',
+  },
+  DISTNAME => "Log-Caller",
+  EXE_FILES => [],
+  LICENSE => "perl",
+  NAME => "Log::Caller",
+  VERSION => "0.03",
+  test => {
     "TESTS" => "t/*.t"
   }
 );
