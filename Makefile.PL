@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
   EXE_FILES => [],
   LICENSE => "perl",
   NAME => "Log::Caller",
-  VERSION => "0.03",
+  VERSION_FROM => 'lib/Log/Caller.pm',
   test => {
     "TESTS" => "t/*.t"
   }

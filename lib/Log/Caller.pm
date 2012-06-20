@@ -7,14 +7,15 @@ use Sub::Exporter -setup => {
     groups  => { all => [ _exports() ] },
 };
 
-our $VERSION = '0.03';
-
+our $VERSION = '0.04';
+$VERSION = eval $VERSION;
 sub _msg {
     my ( $params, $pkg, $fn, $ln, @yarrgs ) = @_;
     my($lvl,$prefix,$fh) = @$params{qw/lvl prefix fh/};
     $fh ||= *STDERR;
     $prefix = $prefix ? $prefix." " : "";
-    my $format = shift @yarrgs || '';
+    my $format = shift @yarrgs;
+    $format = " " unless defined $format; #would rather use //, but backwards compatibilty 
     my $msg = sprintf( $format, (@yarrgs) );
     print $fh $prefix."[$lvl] $msg at $fn line $ln.\n";
     
@@ -41,20 +42,21 @@ Log::Caller
 
  log_debug "scanning new data...";
 
- [debug] scanning new data...  at t/00compile.t line 6
+ [debug] scanning new data...  at t/00compile.t line 6.
 
  log_warn "client %d not found!",$id;
 
- [warn] client 123 not found! at t/00compile.t line 8
+ [warn] client 123 not found! at t/00compile.t line 8.
 
 =head1 DESCRIPTION
  
+ Log Caller is made for those who like the output from warn() but want something with log levels for ease of parsing and filtering.
 
 =over 4
 
 =item log_$level EXPR LIST
 
-Take EXPR as a sprintf pattern and evaluate it with LIST if defined, print it to STDERR or the provided filehandle.
+Take EXPR as a sprintf pattern and evaluate it with LIST if defined then print it to STDERR or the provided filehandle.
 
 =back
 
@@ -83,24 +85,11 @@ log_debug, log_info, log_error, log_warn, log_fatal,
 
 The :all tag is also available for importing all.
 
-=head1 JUSTIFICATION
-
-There are scores of loggers out there, of varying usefulness, yet I still find myself and others constantly putting 
-warn "blah" everywhere in the code. 
-
-Why? 
-
-a) because we're lazy, and it's the lowest effort form of logging output for debugging.
-
-b) the call stack is appended nicely
-
-c) because most loggers are full of bloat
-
-I wanted something that would work like warn but be filterable with proper log levels.
-
 =head1 SEE ALSO
 
 L<Log::Fu> - A configurable logger with caller context among other features.
+
+L<Log::Log4perl> - Also has callstack support, but waaaay more intense.
 
 =head1 AUTHOR
 
