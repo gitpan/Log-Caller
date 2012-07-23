@@ -27,7 +27,7 @@ my %WriteMakefileArgs = (
   NAME => "Log::Caller",
   VERSION_FROM => 'lib/Log/Caller.pm',
   test => {
-    "TESTS" => "t/*.t"
+    TESTS => "t/*.t"
   }
 );
 

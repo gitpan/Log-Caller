@@ -7,7 +7,7 @@ use Sub::Exporter -setup => {
     groups  => { all => [ _exports() ] },
 };
 
-our $VERSION = '0.04';
+our $VERSION = '0.044';
 $VERSION = eval $VERSION;
 sub _msg {
     my ( $params, $pkg, $fn, $ln, @yarrgs ) = @_;
@@ -16,7 +16,7 @@ sub _msg {
     $prefix = $prefix ? $prefix." " : "";
     my $format = shift @yarrgs;
     $format = " " unless defined $format; #would rather use //, but backwards compatibilty 
-    my $msg = sprintf( $format, (@yarrgs) );
+    my $msg = @yarrgs ? sprintf( $format, (@yarrgs) ) : $format;
     print $fh $prefix."[$lvl] $msg at $fn line $ln.\n";
     
 }

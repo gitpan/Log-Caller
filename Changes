@@ -1,0 +1,21 @@
+ (HEAD, origin/master, master) - build  Thu, 12 Jul 2012 16:39:03 +0000
+ - fixed sprintf busting behavior  Thu, 12 Jul 2012 14:54:52 +0000
+ - Changes file  Wed, 20 Jun 2012 16:09:22 +0000
+ (v0.041) - bumped version  Wed, 20 Jun 2012 15:54:42 +0000
+ - deleted stupid symlink  Wed, 20 Jun 2012 15:54:00 +0000
+ - added builde dir  Wed, 20 Jun 2012 15:49:40 +0000
+ - whoops, failed the tests accidentally  Wed, 20 Jun 2012 15:44:45 +0000
+ - fix for 0 not being logged out  Wed, 20 Jun 2012 15:41:27 +0000
+ - pod  Sat, 26 May 2012 00:14:04 +0000
+ - bumped version in makefile  Thu, 24 May 2012 12:58:19 +0000
+ (v0.03) - release v0.03  Thu, 24 May 2012 12:54:50 +0000
+ - config, new deps, new test  Thu, 24 May 2012 03:19:15 +0000
+ - see-also section added to docs  Mon, 21 May 2012 20:28:38 -0400
+ - updated makefile version  Mon, 21 May 2012 22:16:47 +0000
+ (v0.02) - version bump  Mon, 21 May 2012 22:11:33 +0000
+ - documentation cleanup  Mon, 21 May 2012 22:11:09 +0000
+ - whoops, forgot to get README  Mon, 21 May 2012 21:32:11 +0000
+ (v0.01) - gitignore and ready for release  Mon, 21 May 2012 21:27:03 +0000
+ - docs  Fri, 18 May 2012 22:18:24 +0000
+ - some cleanups?  Fri, 18 May 2012 21:07:40 +0000
+ - initial commit  Thu, 17 May 2012 16:45:08 +0000
