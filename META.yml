@@ -20,4 +20,4 @@ no_index:
 requires:
   Sub::Exporter: 0.982
   parent: 0
-version: 0.044
+version: 0.0441

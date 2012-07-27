@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 use Test::More;
-use Data::Dumper::Concise;
 my($fh,$mem);
 BEGIN {
     open($fh,">",\$mem) or die "$@ $!";

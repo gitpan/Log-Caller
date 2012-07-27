@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 use Test::More;
-use Data::Dumper::Concise;
 my($fh,$mem,$prefix);
 BEGIN {
     $prefix = '{test-prefix}';

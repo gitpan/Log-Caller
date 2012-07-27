@@ -7,7 +7,7 @@ use Sub::Exporter -setup => {
     groups  => { all => [ _exports() ] },
 };
 
-our $VERSION = '0.044';
+our $VERSION = '0.0441';
 $VERSION = eval $VERSION;
 sub _msg {
     my ( $params, $pkg, $fn, $ln, @yarrgs ) = @_;
